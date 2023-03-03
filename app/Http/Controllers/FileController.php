@@ -295,9 +295,9 @@ class FileController extends Controller
         //dd('MIA');
         $status=false;
         $msg='';
-
         $tracking_code=$request->tracking_code;
         $department_to=$request->send_to;
+        $file_status=$request->status;
         $no_of_attachments=$request->no_of_attachments;
 
         if(!empty($tracking_code) && !empty($department_to))
@@ -322,7 +322,7 @@ class FileController extends Controller
                             'no_of_attachments' => $no_of_attachments,
                             'ref_file_detail' => $recv_det,
                         ]);
-                        $file->update(['curr_department_id' => null, 'curr_received_date' => null, 'delay_after_date' => null, 'no_of_attachments' => $no_of_attachments]);
+                        $file->update(['curr_department_id' => null, 'curr_received_date' => null, 'delay_after_date' => null, 'no_of_attachments' => $no_of_attachments, 'status' => $file_status]);
 
                         $send_det = $sent_file->ref_department->short_code . '-' . date('Ymd',strtotime($sent_file->created_at))  . '-' . $sent_file->id;
 

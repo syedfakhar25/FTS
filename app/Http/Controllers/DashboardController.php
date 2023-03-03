@@ -26,11 +26,26 @@ class DashboardController extends Controller
             $totalFilesCreated = File::where('department_id',Auth::user()->department_id)->count();
             $totalFilesClosed = File::where('department_id',Auth::user()->department_id)->where('status','Closed')->count();
             $totalFilesUnderProcess = File::where('department_id',Auth::user()->department_id)->whereIn('status',['Under Process','Objection','Speak'])->count();
+
             $totalFilesSpeak = File::where('department_id',Auth::user()->department_id)->where('status','Speak')->count();
             $totalFilesObjection = File::where('department_id',Auth::user()->department_id)->where('status','Objection')->count();
 
             $totalFilesReceived = File::leftJoin('file_details', 'files.id','=','file_details.file_id')
                 ->where('file_details.type','Receive')
+                ->where('file_details.by_department_id',Auth::user()->department_id)
+                ->where('files.department_id','<>',Auth::user()->department_id)
+                ->distinct('files.id')
+                ->count();
+
+            $mytotalFilesSpeak = File::leftJoin('file_details', 'files.id','=','file_details.file_id')
+                ->where('file_details.type','Speak')
+                ->where('file_details.by_department_id',Auth::user()->department_id)
+                ->where('files.department_id','<>',Auth::user()->department_id)
+                ->distinct('files.id')
+                ->count();
+
+            $mytotalFilesObjection = File::leftJoin('file_details', 'files.id','=','file_details.file_id')
+                ->where('file_details.type','Objection')
                 ->where('file_details.by_department_id',Auth::user()->department_id)
                 ->where('files.department_id','<>',Auth::user()->department_id)
                 ->distinct('files.id')
@@ -78,7 +93,8 @@ class DashboardController extends Controller
                 ->count();*/
 
             return view('dashboard_department_admin',compact('totalFilesCreated','totalFilesClosed','totalFilesUnderProcess'
-                ,'totalFilesReceived','totalFilesReceivedstill','totalFilesReceivedforwarded'
+                ,'totalFilesReceived','totalFilesReceivedstill','totalFilesReceivedforwarded', 'totalFilesSpeak','totalFilesObjection' ,
+                'mytotalFilesSpeak', 'mytotalFilesObjection'
             ));
         }
         else

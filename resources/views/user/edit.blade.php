@@ -61,8 +61,8 @@
                                                         <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
                                                         <select id="role" name="role" autocomplete="role"  class="mt-1 block w-full py-2 px-3 border border-gray-300 @error('role') border-red-500 @enderror bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                             {{--<option value="Administrator" @if( old('role') =='Administrator' ) selected="selected" @endif>Administrator</option>--}}
-                                                            <option value="DepartmentAdmin" @if( $user->role == 'DepartmentAdmin' ) selected="selected" @endif>Department Admin</option>
-                                                            <option value="DepartmentDispatchOfficer" @if( $user->role == 'DepartmentDispatchOfficer' ) selected="selected" @endif>Dispatch Officer</option>
+                                                            <option value="DepartmentAdmin" @if( $user->hasRole('DepartmentAdmin') ) selected="selected" @endif>Department Admin</option>
+                                                            <option value="DepartmentDispatchOfficer" @if( $user->hasRole('DepartmentDispatchOfficer' )) selected="selected" @endif>Dispatch Officer</option>
                                                         </select>
                                                         @error('role')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
                                                     </div>

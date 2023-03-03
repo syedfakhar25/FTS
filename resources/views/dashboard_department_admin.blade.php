@@ -57,6 +57,41 @@
                         </div>
                     </div>
                 </a>
+                <div class="col-span-12  xl:col-span-2">
+
+                </div>
+                <a href="{{ URL::to('file?status=Objection') }}" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-4 intro-y bg-white">
+                    <div class="p-5">
+                        <div class="grid grid-cols-3 gap-1">
+                            <div class="col-span-2">
+                                <div class="text-3xl font-bold leading-8">{{number_format($totalFilesObjection,0)}}</div>
+
+                                <div class="mt-1 text-base  font-bold text-gray-600">Objected</div>
+                            </div>
+                            <div class="col-span-1 flex items-center justify-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-12 w-12 text-red-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ URL::to('file?status=Speak') }}" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-4 intro-y bg-white">
+                    <div class="p-5">
+                        <div class="grid grid-cols-3 gap-1">
+                            <div class="col-span-2">
+                                <div class="text-3xl font-bold leading-8">{{number_format($totalFilesSpeak,0)}}</div>
+
+                                <div class="mt-1 text-base  font-bold text-gray-600">Speak</div>
+                            </div>
+                            <div class="col-span-1 flex items-center justify-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-12 w-12 text-blue-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
             <div class="flex justify-center my-8">
                 <span class="font-semibold text-xl text-gray-800 leading-tight">
@@ -105,6 +140,41 @@
                             <div class="col-span-1 flex items-center justify-end">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="col-span-12  xl:col-span-2">
+
+                </div>
+                <a href="{{ URL::to('file?status=Objection') }}" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-4 intro-y bg-white">
+                    <div class="p-5">
+                        <div class="grid grid-cols-3 gap-1">
+                            <div class="col-span-2">
+                                <div class="text-3xl font-bold leading-8">{{number_format($mytotalFilesObjection,0)}}</div>
+
+                                <div class="mt-1 text-base  font-bold text-gray-600">Objected</div>
+                            </div>
+                            <div class="col-span-1 flex items-center justify-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-12 w-12 text-red-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ URL::to('file?status=Speak') }}" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-4 intro-y bg-white">
+                    <div class="p-5">
+                        <div class="grid grid-cols-3 gap-1">
+                            <div class="col-span-2">
+                                <div class="text-3xl font-bold leading-8">{{number_format($mytotalFilesSpeak,0)}}</div>
+
+                                <div class="mt-1 text-base  font-bold text-gray-600">Speak</div>
+                            </div>
+                            <div class="col-span-1 flex items-center justify-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-12 w-12 text-blue-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46" />
                                 </svg>
                             </div>
                         </div>

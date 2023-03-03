@@ -68,6 +68,13 @@
                                     <input autocomplete="off" type="number" name="no_of_attachments" required id="no_of_attachments" min="0" value=""  placeholder="No.of Attachments" class="bg-gray-50 w-full h-10 px-5 rounded-full text-sm focus:outline-none border-0">
                                 </div>
                                 <div class="mt-4">
+                                    <select  name="status" id="status" required  class="bg-gray-50 w-full h-10 px-5 pr-10 rounded-full text-sm focus:outline-none border-0">
+                                        <option value="Under Process">Under Process</option>
+                                        <option value="Speak">Speak</option>
+                                        <option value="Objection">Objection</option>
+                                    </select>
+                                </div>
+                                <div class="mt-4">
                                     <select  name="send_to" id="send_to" required  class="bg-gray-50 w-full h-10 px-5 pr-10 rounded-full text-sm focus:outline-none border-0">
                                         <option value="">Send To Department</option>
                                         @foreach($departments as $dep)

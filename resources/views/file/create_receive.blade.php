@@ -1,9 +1,8 @@
 <x-app-layout>
-
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <span class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Manage Department') }}
+                {{ __('Manage File') }}
             </span>
 
             <div class="flex justify-center items-center float-right">
@@ -26,22 +25,21 @@
     </x-slot>
 
     <div>
-        <div class="max-w-7xl mx-auto py-5">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
 
             {{--<x-alert/>--}}
-            <form action="{{route('department.update',$department->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('file_create_receive_store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
-                <div class="container mx-auto px-5">
+                <div class="container">
                     <div class=" overflow-hidden ">
                         <div class="py-6">
                             <div>
                                 <div class="md:grid md:grid-cols-3 md:gap-6">
                                     <div class="md:col-span-1">
                                         <div class="px-4 sm:px-0">
-                                            <h3 class="text-lg font-medium leading-6 text-gray-900">Edit Department</h3>
+                                            <h3 class="text-lg font-medium leading-6 text-gray-900">Create File & Receive</h3>
                                             <p class="mt-1 text-sm text-gray-600">
-                                                Enter department title and logo.
+                                                Enter file title and description.
                                             </p>
                                         </div>
                                     </div>
@@ -50,58 +48,49 @@
                                             <div class="px-4 py-5 bg-white sm:p-6">
                                                 <div class="grid grid-cols-6 gap-6">
                                                     <div class="col-span-6">
-                                                        <label for="name"
-                                                               class="block text-sm font-medium text-gray-700">Title</label>
-                                                        <input type="text" name="title" id="title" value="{{$department->title}}"
+                                                        <div class="new_file">
+                                                            <input name="file_type" type="hidden" value="New">
+                                                            <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                                                            <input type="text" name="title" id="title" value="{{old('title')}}" autocomplete="name" required="required" class="border-gray-300 @error('title') border-red-500 @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md">
+                                                            @error('title')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-span-2">
+                                                        <label for="no_of_attachments" class="block text-sm font-medium text-gray-700">No.of Attachments</label>
+                                                        <input type="number" min="0" name="no_of_attachments" id="title" value="{{old('no_of_attachments')}}"
                                                                autocomplete="name" required="required"
-                                                               class="border-gray-300 @error('title') border-red-500 @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md">
-                                                        @error('title')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
+                                                               class="border-gray-300 @error('no_of_attachments') border-red-500 @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md">
+                                                        @error('no_of_attachments')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
+                                                    </div>
+                                                    <div class="col-span-4">
+                                                        <label for="send_to" class="block text-sm font-medium text-gray-700">Sent From</label>
+                                                        <select id="send_to" name="send_to" autocomplete="send_to" required  class="mt-1 block w-full py-2 px-3 border border-gray-300 @error('send_to') border-red-500 @enderror bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            <option value="">Select Department</option>
+                                                            @foreach($departments as $dep)
+                                                                <option value="{{$dep->id}}" @if( old('send_to') == $dep->id ) selected="selected" @endif>{{$dep->title}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('send_to')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
+                                                    </div>
+                                                    <div class="col-span-6 new_file">
+                                                        <label for="description"
+                                                               class="block text-sm font-medium text-gray-700">Description</label>
+                                                        <textarea name="description"
+                                                                  class="border-gray-300 @error('description') border-red-500 @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md">{{old('description')}}</textarea>
+                                                        @error('description')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
                                                     </div>
 
-                                                    <div class="col-span-2">
-                                                        <label for="short_code"
-                                                               class="block text-sm font-medium text-gray-700">Code</label>
-                                                        <input type="text" name="short_code" id="short_code" value="{{$department->short_code}}"
-                                                               autocomplete="short_code" required="required"
-                                                               class="border-gray-300 @error('short_code') border-red-500 @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md">
-                                                        @error('short_code')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
-                                                    </div>
-                                                    <div class="col-span-2">
-                                                        <label for="short_code"
-                                                               class="block text-sm font-medium text-gray-700">Delay Period</label>
-                                                        <input type="number" min="2" name="delay_threshhold" id="delay_threshhold" value="{{$department->delay_threshhold}}"
-                                                               autocomplete="delay_threshhold" required="required"
-                                                               class="border-gray-300 @error('delay_threshhold') border-red-500 @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md">
-                                                        @error('delay_threshhold')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
-                                                    </div>
-                                                    <div class="col-span-2">
-                                                        <label for="short_code"
-                                                               class="block text-sm font-medium text-gray-700">&nbsp;</label>
-                                                        <input  @if($department->system_installed ==1) checked @endif id="system_installed" type="checkbox" name="system_installed" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                        <label for="system_installed" class="ml-2 text-sm font-medium text-black-700">System Installed</label>
-                                                    </div>
-                                                    <div class="col-span-6">
+                                                    <div class="col-span-6 new_file">
                                                         <div aria-label="File Upload Modal" class="relative h-full flex flex-col" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);" ondragenter="dragEnterHandler(event);">
-                                                            <label for="status" class="block text-sm font-medium text-gray-700">Logo</label>
-                                                            @if(!empty($department->logo_path))
-                                                                <ul class="flex flex-1 flex-wrap my-2">
-                                                                    <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8">
-                                                                        <a href="{{\Illuminate\Support\Facades\Storage::url($department->logo_path)}}" target="_blank" class="border border-gray-200 block p-2">
-                                                                            @if(Str::endsWith(strtolower($department->logo_path),'.jpg') || Str::endsWith(strtolower($department->logo_path),'.png'))
-                                                                                <img src="{{\Illuminate\Support\Facades\Storage::url($department->logo_path)}}" class="block w-24">
-                                                                           @endif
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            @endif
+                                                            <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Attachments</label>
 
                                                             <header class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
                                                                 <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
-                                                                    <span>Drag and drop your</span>&nbsp;<span>logo anywhere or</span>
+                                                                    <span>Drag and drop your</span>&nbsp;<span>attachments anywhere or</span>
                                                                 </p>
-                                                                <input id="hidden-input" name="logo" type="file"  class="hidden" />
+                                                                <input id="hidden-input" name="attach_files[]" type="file"  class="hidden" multiple />
                                                                 <button id="button" type="button" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
-                                                                    Upload a logo
+                                                                    Upload attachments
                                                                 </button>
                                                             </header>
 
@@ -114,8 +103,8 @@
 
                                                             <ul id="gallery" class="flex flex-1 flex-wrap -m-1">
                                                                 <li id="empty" class="h-full w-full text-center flex flex-col items-center justify-center items-center">
-                                                                    <img class="mx-auto w-32" src="{{url('images/no-file.png')}}" alt="" />
-                                                                    <span class="text-small text-gray-500">No logo selected</span>
+                                                                    <img class="mx-auto w-32" src="{{url('img/no-file.png')}}" alt="" />
+                                                                    <span class="text-small text-gray-500">No attachment selected</span>
                                                                 </li>
                                                             </ul>
                                                             <div id="overlay" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
@@ -124,17 +113,15 @@
                                                                         <path d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
                                                                     </svg>
                                                                 </i>
-                                                                <p class="text-lg text-blue-700">Drop logo to upload</p>
+                                                                <p class="text-lg text-blue-700">Drop attachments to upload</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                                <button type="submit"
-                                                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                                                    Save
-                                                </button>
+                                                <input type="submit" name="Save" type="submit" value="Print QR Code"
+                                                       class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                             </div>
                                         </div>
                                     </div>
@@ -146,14 +133,12 @@
                                     <div class="border-t border-gray-200"></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- using two similar templates for simplicity in js code -->
     <template id="file-template">
         <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
@@ -211,6 +196,41 @@
     </template>
 
     <script type="text/javascript">
+        function fileType_change(value)
+        {
+            console.log('changed');
+            console.log(value);
+
+            if (value == 'new') {
+                jQuery('.new_file').removeClass('hidden');
+                jQuery('.new_file').addClass('block');
+
+                jQuery('.copy_file').removeClass('block');
+                jQuery('.copy_file').addClass('hidden');
+
+                jQuery('.new_file.redfield input').attr('required','required');
+                jQuery('.copy_file.redfield input').removeAttr('required');
+            }
+            else if (value == 'copy') {
+                jQuery('.copy_file').removeClass('hidden');
+                jQuery('.copy_file').addClass('block');
+
+                jQuery('.new_file').removeClass('block');
+                jQuery('.new_file').addClass('hidden');
+
+                jQuery('.new_file.redfield input').removeAttr('required');
+                jQuery('.copy_file.redfield input').attr('required','required');
+            }
+        }
+        jQuery(document).ready(function(){
+            jQuery('input[type=radio][name=file_type]').change(function() {
+                fileType_change(this.value);
+            });
+            fileType_change(jQuery('input[type=radio][name=file_type]:checked').val());
+        });
+
+
+
 
         const fileTempl = document.getElementById("file-template"),
             imageTempl = document.getElementById("image-template"),
@@ -235,8 +255,8 @@
             clone.querySelector(".size").textContent =
                 file.size > 1024
                     ? file.size > 1048576
-                        ? Math.round(file.size / 1048576) + "mb"
-                        : Math.round(file.size / 1024) + "kb"
+                    ? Math.round(file.size / 1048576) + "mb"
+                    : Math.round(file.size / 1024) + "kb"
                     : file.size + "b";
 
             isImage &&
@@ -362,5 +382,4 @@
             color: #2b6cb0;
         }
     </style>
-
 </x-app-layout>

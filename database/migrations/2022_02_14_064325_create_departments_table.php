@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('file_month')->nullable();
             $table->integer('file_date')->nullable();
             $table->integer('file_counter')->nullable();
+            $table->tinyInteger('system_installed')->default(0);
 
             $table->timestamps();
         });

@@ -116,6 +116,11 @@ class FileController extends Controller
         $departments = Department::where('id','<>',Auth::user()->department_id)->get();
         return view('file.create',compact('departments'));
     }
+    public function createReceive()
+    {
+        $departments = Department::where('id','<>',Auth::user()->department_id)->where('system_installed', 0)->get();
+        return view('file.create_receive',compact('departments'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -209,6 +214,85 @@ class FileController extends Controller
             'no_of_attachments'=>$request->no_of_attachments,
             'attachments'=>$attachments,
         ]);
+
+        session()->flash('message', 'File Created & please make sure to paste QR code on file before dispatching.');
+        session()->flash('fileprintlabel', $newfile->id);
+        return to_route('dashboard');
+    }
+
+    public function storeCreateReceive(StoreFileRequest $request)
+    {
+
+        $department_from = Department::find($request->send_to);
+        $dep_from_shrtcode = $department_from->short_code;
+
+        $year = $department_from->file_year;
+        $month = $department_from->file_month;
+        $day = $department_from->file_date;
+        $filenum =  $department_from->file_counter;
+
+        if($year != date('y'))
+        {
+            $year= date('y');
+            $month= date('m');
+            $day= date('d');
+            $filenum= 1;
+        }
+        else{
+            if($month != date('m'))
+            {
+                $month= date('m');
+            }
+            if($day != date('d'))
+            {
+                $day= date('d');
+            }
+            if(empty($filenum))
+            {
+                $filenum= 1;
+            }
+            else
+            {
+                $filenum++;
+            }
+        }
+
+        $tn = $dep_from_shrtcode.'-'.$year.$month.'-'.$day.$filenum;
+
+        $department_from->update(['file_year'=>$year,'file_month'=>$month,'file_date'=>$day,'file_counter'=>$filenum]);
+        $request->merge(['department_id'=>$request->send_to]);
+        $request->merge(['tracking_no'=>$tn]);
+
+        $newfile = File::create($request->all());
+
+
+        $attachments='';
+        if($request->has('attach_files'))
+        {
+            foreach($request->attach_files as $file)
+                $attachments .= $file->store('file-attachments/file-'.$newfile->id,'public').',';
+            $newfile->update(['attachments'=>$attachments]);
+        }
+
+        FileDetail::create([
+            'file_id'=>$newfile->id,
+            'type'=>'Send',
+            'by_department_id'=>$request->send_to,
+            'ref_department_id'=>Auth::user()->department_id,
+            'no_of_attachments'=>$request->no_of_attachments,
+            'attachments'=>$attachments,
+        ]);
+        FileDetail::create([
+            'file_id'=>$newfile->id,
+            'type'=>'Receive',
+            'by_department_id'=>Auth::user()->department_id,
+            'ref_department_id'=>$request->send_to,
+            'no_of_attachments'=>$request->no_of_attachments,
+            'attachments'=>$attachments,
+        ]);
+        $due_date = date("Y-m-d H:i:s",strtotime('+'.Auth::user()->department->delay_threshhold.' days'));
+        $newfile->update(['curr_department_id'=>Auth::user()->department_id,'curr_received_date'=>date('Y-m-d H:i:s'),'delay_after_date'=>$due_date]);
+
 
         session()->flash('message', 'File Created & please make sure to paste QR code on file before dispatching.');
         session()->flash('fileprintlabel', $newfile->id);

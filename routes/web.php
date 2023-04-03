@@ -28,6 +28,8 @@ Route::middleware(['auth:sanctum', 'verified'])->resource('user', \App\Http\Cont
 
 Route::middleware(['auth:sanctum', 'verified'])->get('send', [\App\Http\Controllers\FileController::class,'send'])->name('file.send');
 Route::middleware(['auth:sanctum', 'verified'])->get('receive', [\App\Http\Controllers\FileController::class,'receive'])->name('file.receive');
+Route::middleware(['auth:sanctum', 'verified'])->get('create_receive', [\App\Http\Controllers\FileController::class,'createReceive'])->name('create_receive');
+Route::middleware(['auth:sanctum', 'verified'])->post('file_create_receive_store', [\App\Http\Controllers\FileController::class,'storeCreateReceive'])->name('file_create_receive_store');
 Route::middleware(['auth:sanctum', 'verified'])->get('checkattachments', [\App\Http\Controllers\FileController::class,'checkattachments'])->name('file.checkattachments');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('file/{file}/printlabel', [\App\Http\Controllers\FileController::class,'printlabel'])->name('file.printlabel');

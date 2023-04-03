@@ -4,7 +4,6 @@
             <span class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Manage Files') }}
             </span>
-
             <div class="flex justify-center items-center float-right">
                 <form action="{{route('file.index')}}" method="get" class="flex flex-wrap justify-between md:flex-row rounded-lg overflow-hidden">
                     <input  type="search" name="searchq" value="{{request()->has('searchq') ? @request()->get('searchq'):'' }}" placeholder="Search Files" class="flex-1 px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border-none appearance-none dark:text-gray-200 focus:outline-none focus:placeholder-transparent focus:ring-0 ">
@@ -47,8 +46,8 @@
     </x-slot>
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <table class="min-w-max w-full table-auto">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" style="overflow: auto">
+                <table class="min-w-max w-full table-auto" >
                     <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-center w-2">S.No</th>

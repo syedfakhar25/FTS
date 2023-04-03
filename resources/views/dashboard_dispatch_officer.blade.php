@@ -37,8 +37,8 @@
                             </div>
                             <h2 class="text-xl font-medium text-gray-700 mb-8">Recieve File</h2>
 
-                            <a href="javascript:;" id="receive_open" class="inline-block py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            >Receive</a>
+                            <a href="javascript:;" id="receive_open" class="inline-block py-2 px-8 mx-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300">Existing</a>
+                            <a href="{{url('create_receive')}}" class="inline-block py-2 px-8 mx-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300">Create & Receive</a>
                         </div>
                     </div>
                 </div>

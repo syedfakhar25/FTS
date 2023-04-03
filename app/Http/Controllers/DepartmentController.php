@@ -104,8 +104,11 @@ class DepartmentController extends Controller
             ]);
         }
 
-
-
+        if($request->system_installed == NULL){
+            $request->merge([
+                'system_installed'=> 0
+            ]);
+        }
         $department->update($request->all());
         session()->flash('message', 'Department successfully updated.');
         return redirect()->route('department.index');

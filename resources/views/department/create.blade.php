@@ -55,7 +55,7 @@
                                                                class="border-gray-300 @error('title') border-red-500 @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md">
                                                         @error('title')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
                                                     </div>
-                                                    <div class="col-span-3">
+                                                    <div class="col-span-2">
                                                         <label for="short_code"
                                                                class="block text-sm font-medium text-gray-700">Code</label>
                                                         <input type="text" name="short_code" id="short_code" value="{{old('short_code')}}"
@@ -63,13 +63,20 @@
                                                                class="border-gray-300 @error('short_code') border-red-500 @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md">
                                                         @error('short_code')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
                                                     </div>
-                                                    <div class="col-span-3">
+                                                    <div class="col-span-2">
                                                         <label for="short_code"
                                                                class="block text-sm font-medium text-gray-700">Delay Period</label>
                                                         <input type="number" min="2" name="delay_threshhold" id="delay_threshhold" value="{{old('delay_threshhold')}}"
                                                                autocomplete="delay_threshhold" required="required"
                                                                class="border-gray-300 @error('delay_threshhold') border-red-500 @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md">
                                                         @error('delay_threshhold')<span class="text-red-500 mt-1 text-sm">{{ $message }}</span>@enderror
+                                                    </div>
+
+                                                    <div class="col-span-2">
+                                                        <label for="short_code"
+                                                               class="block text-sm font-medium text-gray-700">&nbsp;</label>
+                                                            <input  checked id="system_installed" type="checkbox" name="system_installed" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="system_installed" class="ml-2 text-sm font-medium text-black-700">System Installed</label>
                                                     </div>
 
                                                     <div class="col-span-6">
